@@ -1,0 +1,17 @@
+      user_data = <<-EOT
+          #cloud-config
+          hostname: somename
+          users:
+            - name: astra
+              groups: astra-admin
+              shell: /bin/bash
+              sudo: ['ALL=(ALL) NOPASSWD:ALL']
+              parsec_user_max_ilev: high
+              ssh-authorized-keys:
+                - ssh-ed25519 AAAAC3....zvNm administrator@example.com
+          package_update: true
+          packages:
+            - nginx
+          runcmd:
+            - systemctl start nginx
+        EOT
