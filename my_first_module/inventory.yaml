@@ -1,0 +1,8 @@
+test:
+  hosts:
+    server:
+      ansible_host: 192.168.105.215
+
+all:
+  vars:
+    ansible_user: astra

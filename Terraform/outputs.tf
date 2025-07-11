@@ -3,7 +3,7 @@ output "my_vms_info" {
   value = [
     for vm in libvirt_domain.VM_entity : {
       vm_name = vm.name
-      vm_ip   = vm.network_interface[0].addresses.0
+      vm_ip   = try(vm.network_interface[0].addresses[0], null)
     }
   ]
 }

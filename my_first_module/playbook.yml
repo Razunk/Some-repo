@@ -1,0 +1,10 @@
+---
+- name: Test my sosreport module
+  hosts: all
+  become: true
+  tasks:
+    - name: Create archive
+      sosreport:
+        case_id: SIRIUS-966107
+        collect_logs: true
+        install: true
