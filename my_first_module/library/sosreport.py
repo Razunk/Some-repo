@@ -71,9 +71,11 @@ def run_sosreport(module, case_id, collect_logs):
     if case_id and not re.match(r'^[a-zA-Z0-9_-]+$', case_id):
         module.fail_json(msg="Invalid case_id. Only alphanumeric chars, '-' and '_' are allowed")
 
-    cmd = "sosreport -a --batch"
-    cmd += f" --case-id {case_id}" if case_id else ""
-    cmd += " --all-logs" if collect_logs else ""
+    cmd = ["sosreport", "-a", "--batch"]
+    if case_id:
+        cmd.extend(["--case-id", case_id])
+    if collect_logs:
+        cmd.append("--all-logs")
 
     if module.check_mode:
       module.exit_json(changed=True, msg=f"Would have run: {cmd}")
