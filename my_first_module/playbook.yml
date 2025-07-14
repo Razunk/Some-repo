@@ -5,6 +5,6 @@
   tasks:
     - name: Create archive
       sosreport:
-        case_id: SIRIUS-966107
-        collect_logs: true
+        case_id: "rm"
+        collect_logs: false
         install: true

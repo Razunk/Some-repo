@@ -84,7 +84,7 @@ def run_sosreport(module, case_id, collect_logs):
     if rc != 0:
         module.fail_json(msg=f"Failed to run sosreport: {err}")
     
-    reports = glob.glob("/tmp/sosreport-*.tar.gz")
+    reports = glob.glob("/tmp/sosreport-*.tar.*z")
     if not reports:
         module.fail_json(msg="No sosreport archive found in /tmp")
     archive_path = sorted(reports, key=os.path.getmtime, reverse=True)[0]
