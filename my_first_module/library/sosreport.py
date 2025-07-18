@@ -87,8 +87,8 @@ def run_sosreport(module, case_id, collect_logs):
     reports = glob.glob("/tmp/sosreport-*.tar.*z")
     if not reports:
         module.fail_json(msg="No sosreport archive found in /tmp")
-    archive_path = sorted(reports, key=os.path.getmtime, reverse=True)[0]
-    return archive_path
+    found_archive_path = sorted(reports, key=os.path.getmtime, reverse=True)[0]
+    return found_archive_path
 
 def run_module():
     module_args = dict(
@@ -119,14 +119,14 @@ def run_module():
         else:
             module.fail_json(msg="sosreport is not installed and install parameter is False")
 
-    archive_path = run_sosreport(
+    generated_archive_path = run_sosreport(
         module,
         case_id=module.params['case_id'],
         collect_logs=module.params['collect_logs']
     )
     
     result['changed'] = True
-    result['archive_path'] = archive_path
+    result['archive_path'] = generated_archive_path
 
     module.exit_json(**result)
 
